@@ -16,7 +16,7 @@
 
         <ImageView
             android:id="@+id/upride_logo"
-            android:layout_width="44dp"
+            android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="upride logo "
             android:maxHeight="30dp"
@@ -45,25 +45,26 @@
 
         <ImageButton
             android:id="@+id/bellIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginEnd="10dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_vertical"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="bellIcon"
             android:src="@drawable/bellicon"
-            tools:ignore="TouchTargetSizeCheck" />
+             />
 
         <ImageButton
             android:id="@+id/navigationDrawerIcon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_gravity="center_vertical"
             android:contentDescription="navigation drawer icon"
             android:src="@drawable/navigation_drawer_icon"
-            tools:ignore="TouchTargetSizeCheck" />
+            />
 
 
     </LinearLayout>
