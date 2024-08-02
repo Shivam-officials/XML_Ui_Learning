@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:elevation="20dp"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/TopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
+        android:elevation="30dp"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageButton
+            android:id="@+id/uprideLogo"
+            android:layout_width="39dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="upride logo"
+            app:srcCompat="@drawable/upridelogo" />
+
+        <ImageButton
+            android:id="@+id/uprideName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="upride name"
+            app:srcCompat="@drawable/upridesignlogo" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/notificationIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="notification icon"
+            app:srcCompat="@drawable/bellicon" />
+
+        <ImageButton
+            android:id="@+id/navigationDrawerIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="navigationDrawer icon"
+            app:srcCompat="@drawable/navigation_drawer_icon" />
+
+
+    </LinearLayout>
+
+    <!--    scroll view for scrolling out screen-->
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:background="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomCard"
+        app:layout_constraintTop_toBottomOf="@+id/TopBar">
+
+        <!--    rest of the screen-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- banner -->
+            <ImageView
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img" />
+
+            <!--     screenlocation address       -->
+            <TextView
+                android:id="@+id/screenLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Home > Sharpdrives-Driving -Training -School"
+                android:textColor="#4a5568"
+                android:textSize="16sp" />
+
+            <!--            lincecese course card-->
+            <include layout="@layout/layout_course_card" />
+
+            <!--            coupan part-->
+            <include layout="@layout/layout_coupan" />
+
+
+            <!--            benefits layout -->
+            <include layout="@layout/layout_benefits" />
+
+
+            <!--        why choose us block -->
+
+            <include layout="@layout/layout_why_choose_us_block"
+                />
+
+            <!--            school details-->
+            <include layout="@layout/layout_school_details" />
+
+            <!--            payment summary -->
+            <include layout="@layout/layout_payment_summary" />
+
+            <!--call now section -->
+            <include layout="@layout/layout_call_now" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!--    bottom card with price-->
+    <include
+        layout="@layout/layout_bottom_card"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

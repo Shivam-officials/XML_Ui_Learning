@@ -19,6 +19,16 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // Check if the fragment container is null to avoid overlapping fragments
+        if (savedInstanceState == null) {
+            // Create an instance of the fragment
+            val fragment = screen5()
+
+            // Attach the fragment to the activity
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, fragment)
+                .commit()
+        }
 
     }
 }
