@@ -116,11 +116,11 @@
 
 <!--        why choose us block -->
 
-            <include layout="@layout/why_choose_us_block"
+            <include layout="@layout/layout_why_choose_us_block"
                 />
 
 <!--            school details-->
-            <include layout="@layout/layouta_school_details" />
+            <include layout="@layout/layout_school_details" />
 
 <!--            payment summary -->
             <include layout="@layout/layout_payment_summary" />
