@@ -74,10 +74,10 @@
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:background="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/bottomCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottomCard"
         app:layout_constraintTop_toBottomOf="@+id/TopBar">
 
         <!--    rest of the screen-->
@@ -116,8 +116,7 @@
 
             <!--        why choose us block -->
 
-            <include layout="@layout/layout_why_choose_us_block"
-                />
+            <include layout="@layout/layout_why_choose_us_block" />
 
             <!--            school details-->
             <include layout="@layout/layout_school_details" />
@@ -131,7 +130,5 @@
     </ScrollView>
 
     <!--    bottom card with price-->
-    <include
-        layout="@layout/layout_bottom_card"
-        />
+    <include layout="@layout/layout_bottom_card" />
 </androidx.constraintlayout.widget.ConstraintLayout>
