@@ -77,6 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomCard"
         app:layout_constraintTop_toBottomOf="@+id/TopBar">
 
         <!--    rest of the screen-->
@@ -124,6 +125,8 @@
 <!--            payment summary -->
             <include layout="@layout/layout_payment_summary" />
 
+<!--call now section -->
+            <include layout="@layout/layout_call_now" />
         </LinearLayout>
     </ScrollView>
 

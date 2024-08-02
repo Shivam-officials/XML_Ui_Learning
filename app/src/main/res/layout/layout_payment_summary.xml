@@ -7,12 +7,14 @@
     android:layout_margin="16dp"
     android:padding="16dp"
     app:cardElevation="4dp"
-    app:cardCornerRadius="8dp"
-    tools:showIn="@layout/activity_main">
+    app:cardCornerRadius="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:orientation="vertical">
 
         <!-- Payment Summary Title -->
@@ -22,14 +24,15 @@
             android:text="Payment Summary"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
+            android:padding="16dp"
+            android:layout_marginBottom="8dp" />
 
         <!-- Total Amount -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
+            android:layout_margin="8dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -52,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
+            android:layout_margin="8dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -75,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_margin="8dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -97,13 +100,16 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="8dp"
             android:background="@android:color/darker_gray"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="8dp" />
 
         <!-- Total -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="16dp"
             android:orientation="horizontal">
 
             <TextView
