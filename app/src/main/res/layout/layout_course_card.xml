@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--            lincecese course card-->
+<androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/course_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    app:cardCornerRadius="16dp"
+    tools:showIn="@layout/activity_main">
+
+    <!--                linear layout for course detial-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <!--                    course image view-->
+        <ImageView
+            android:id="@+id/courseCard"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/course_card_round"
+            android:scaleType="centerCrop"
+            android:src="@drawable/_2w_licence" />
+
+
+        <!--course card details-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/course_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/school_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="SharpDrives Motor Driving Training School"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:alpha="0.9"
+                    android:text="Learn 2W + 4W with License Training" />
+
+                <TextView
+                    android:id="@+id/sessions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="10 Sessions"
+                    android:textColor="#7f8789"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/course_fee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Course Fee" />
+
+                <LinearLayout
+                    android:id="@+id/price_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/DiscountedPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="₹4500/-"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/OriginalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₹5500/-"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="18sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+            
