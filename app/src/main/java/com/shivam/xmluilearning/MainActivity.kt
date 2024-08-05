@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        
         // Check if the fragment container is null to avoid overlapping fragments
         if (savedInstanceState == null) {
             // Create an instance of the fragment

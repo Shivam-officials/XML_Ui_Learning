@@ -10,69 +10,18 @@
     tools:context=".MainActivity">
 
 
-    <LinearLayout
-        android:id="@+id/TopBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/white"
-        android:elevation="30dp"
-        android:gravity="center_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <ImageButton
-            android:id="@+id/uprideLogo"
-            android:layout_width="39dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="10dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="upride logo"
-            app:srcCompat="@drawable/upridelogo" />
-
-        <ImageButton
-            android:id="@+id/uprideName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="upride name"
-            app:srcCompat="@drawable/upridesignlogo" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:id="@+id/notificationIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="notification icon"
-            app:srcCompat="@drawable/bellicon" />
-
-        <ImageButton
-            android:id="@+id/navigationDrawerIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="navigationDrawer icon"
-            app:srcCompat="@drawable/navigation_drawer_icon" />
-
-
-    </LinearLayout>
+    <!--    top app bar -->
+    <include layout="@layout/layout_top_appbar" />
 
     <!--    scroll view for scrolling out screen-->
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/bottomCard"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,12 +35,25 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
             <!-- banner -->
-            <ImageView
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/img" />
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+                <ImageButton
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_margin="0dp"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="null"
+                    android:padding="0dp"
+                    app:srcCompat="@drawable/img" />
+
+<!--            </androidx.cardview.widget.CardView>-->
+
 
             <!--     screenlocation address       -->
             <TextView

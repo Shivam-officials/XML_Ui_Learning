@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--            lincecese course card-->
-<androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/course_card"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    app:cardCornerRadius="16dp"
-    tools:showIn="@layout/activity_main">
+<!--<androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/course_card"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_margin="16dp"-->
+<!--    android:padding="8dp"-->
+<!--    app:cardCornerRadius="16dp"-->
+<!--    tools:showIn="@layout/activity_main">-->
 
     <!--                linear layout for course detial-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+<LinearLayout  xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:orientation="horizontal">
 
 
-        <!--                    course image view-->
-        <ImageView
-            android:id="@+id/courseCard"
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/course_card_round"
-            android:scaleType="centerCrop"
-            android:src="@drawable/_2w_licence" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/courseCard"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/course_card_round"
+                android:scaleType="centerCrop"
+                android:src="@drawable/_2w_licence" />
+
+        </androidx.cardview.widget.CardView>
+        <!--                    course image view-->
+
 
 
         <!--course card details-->
@@ -104,7 +114,7 @@
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+<!--</androidx.cardview.widget.CardView>-->
 
 
             

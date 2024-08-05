@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:padding="16dp"
-    app:cardElevation="4dp"
+    app:cardElevation="1dp"
     app:cardCornerRadius="8dp"
     tools:showIn="@layout/activity_main">
 

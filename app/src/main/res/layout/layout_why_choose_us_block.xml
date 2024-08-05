@@ -16,6 +16,7 @@
         android:text="Why Choose us"
         android:textSize="18sp"
         android:textStyle="bold"
+        style="@style/MaterialAlertDialog.Material3.Title.Text"
         android:layout_marginBottom="16dp" />
 
     <!-- First Item -->

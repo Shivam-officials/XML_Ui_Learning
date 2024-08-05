@@ -7,6 +7,7 @@
     android:id="@+id/benefits_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:cardElevation="0dp"
     tools:showIn="@layout/activity_main">
 
     <LinearLayout
@@ -20,7 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="What you will get?"
-            android:textSize="24sp"
+            android:textSize="18sp"
+            style="@style/MaterialAlertDialog.Material3.Title.Text"
             android:textStyle="bold" />
 
         <LinearLayout

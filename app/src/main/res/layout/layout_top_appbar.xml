@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?><!--    top app bar -->
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TopBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@android:color/white"
+    android:elevation="1dp"
+    android:gravity="center_vertical"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:showIn="@layout/fragment_screen5">
+
+
+    <ImageButton
+        android:id="@+id/uprideLogo"
+        android:layout_width="39dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="10dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="upride logo"
+        app:srcCompat="@drawable/upridelogo" />
+
+    <ImageButton
+        android:id="@+id/uprideName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="upride name"
+        app:srcCompat="@drawable/upridesignlogo" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/notificationIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="notification icon"
+        app:srcCompat="@drawable/bellicon" />
+
+    <ImageButton
+        android:id="@+id/navigationDrawerIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="navigationDrawer icon"
+        app:srcCompat="@drawable/navigation_drawer_icon" />
+
+
+</LinearLayout>
