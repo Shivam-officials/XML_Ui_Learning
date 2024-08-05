@@ -24,7 +24,8 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp">
             <ImageView
                 android:id="@+id/courseCard"
                 android:layout_width="wrap_content"
@@ -42,7 +43,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/course_detail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -104,6 +105,7 @@
                         android:id="@+id/OriginalPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         android:text="₹5500/-"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="18sp"
