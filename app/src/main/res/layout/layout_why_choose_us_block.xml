@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="16dp">
-<!--    tools:showIn="@layout/activity_main">-->
+    <!--    tools:showIn="@layout/fragment_screen5">-->
 
 
     <!--  Title -->
     <TextView
+        style="@style/MaterialAlertDialog.Material3.Title.Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="Why Choose us"
         android:textSize="18sp"
-        android:textStyle="bold"
-        style="@style/MaterialAlertDialog.Material3.Title.Text"
-        android:layout_marginBottom="16dp" />
+        android:textStyle="bold" />
 
     <!-- First Item -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#FFF0F0">
+        android:backgroundTint="#FFF0F0"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center_vertical">
+            android:padding="16dp">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/unmatched_driving"
-                android:layout_marginEnd="16dp" />
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/unmatched_driving" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -51,15 +51,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Unmatched Driving Experience, Guaranteed"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="₹5500/-"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray" />
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -68,30 +68,30 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#E0F8E0">
+        android:backgroundTint="#E0F8E0"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center_vertical">
+            android:padding="16dp">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/verified_driving"
-                android:layout_marginEnd="16dp" />
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/verified_driving" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Verified Driving Schools with best Instructors"
-                android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -99,30 +99,30 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="#E0F0FF">
+        android:backgroundTint="#E0F0FF"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center_vertical">
+            android:padding="16dp">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/gurranteed_refund"
-                android:layout_marginEnd="16dp" />
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/gurranteed_refund" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100% Guaranteed Refund, if Service not taken"
-                android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -130,29 +130,29 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#FFF0E0"
         app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
-        android:backgroundTint="#FFF0E0">
+        app:cardElevation="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center_vertical">
+            android:padding="16dp">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/satisfactin"
-                android:layout_marginEnd="16dp" />
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/satisfactin" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100% Satisfaction"
-                android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

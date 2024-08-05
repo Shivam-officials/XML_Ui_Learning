@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?><!--call now section -->
 
-<androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:padding="16dp"
-    app:cardElevation="1dp"
     app:cardCornerRadius="8dp"
-    tools:showIn="@layout/activity_main">
+    app:cardElevation="1dp">
+    <!--    tools:showIn="@layout/fragment_screen5">-->
 
     <LinearLayout
-        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <!-- Title -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="Consult Our Team"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
+            android:textStyle="bold" />
 
         <!-- Image and Text -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/customerservice"
-                android:layout_marginEnd="16dp" />
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/customerservice" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Our team will understand your requirements and will suggest you the best service."
-                android:textSize="16sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <!-- Call Now Button -->
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:backgroundTint="#38a169"
-            android:text="Call Now"
-            android:textColor="@android:color/white"
             android:drawableStart="@drawable/call"
             android:drawablePadding="8dp"
             android:padding="16dp"
-            android:textSize="16sp"
-            android:layout_gravity="center" />
+            android:text="Call Now"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
 

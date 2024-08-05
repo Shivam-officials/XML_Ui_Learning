@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?><!--            payment summary -->
-<androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
     android:layout_marginTop="0dp"
     android:layout_marginEnd="16dp"
-    android:layout_marginStart="16dp"
     android:padding="16dp"
-    app:cardElevation="1dp"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="1dp">
+    <!--    tools:showIn="@layout/fragment_screen5">-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
         android:orientation="vertical">
 
@@ -23,79 +24,79 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp"
             android:text="Payment Summary"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:padding="16dp"
-            android:layout_marginBottom="8dp" />
+            android:textStyle="bold" />
 
         <!-- Total Amount -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="8dp">
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Total Amount"
-                android:textSize="16sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="₹ 4500"
-                android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <!-- Discount -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="8dp">
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Discount"
-                android:textSize="16sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="₹ 500"
-                android:textSize="16sp"
-                android:textColor="#38a169" />
+                android:textColor="#38a169"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <!-- Taxes and Fee -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="8dp">
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Taxes and Fee"
-                android:textSize="16sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@android:color/darker_gray"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="₹ 48"
-                android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <!-- Divider Line -->
@@ -103,8 +104,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="8dp"
-            android:background="@android:color/darker_gray"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/darker_gray" />
 
         <!-- Total -->
         <LinearLayout
@@ -119,17 +120,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Total"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="₹ 4048"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black" />
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:elevation="20dp"
+    android:elevation="0dp"
     tools:context=".MainActivity">
 
 
@@ -32,27 +32,27 @@
         <!--    rest of the screen-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
             <!-- banner -->
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content">-->
+            <!--            <androidx.cardview.widget.CardView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content">-->
 
-                <ImageButton
-                    android:id="@+id/banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_margin="0dp"
-                    android:scaleType="fitCenter"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="null"
-                    android:padding="0dp"
-                    app:srcCompat="@drawable/img" />
+            <ImageButton
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="0dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="null"
+                android:padding="0dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/img" />
 
-<!--            </androidx.cardview.widget.CardView>-->
+            <!--            </androidx.cardview.widget.CardView>-->
 
 
             <!--     screenlocation address       -->
