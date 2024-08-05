@@ -2,4 +2,5 @@
     <string name="app_name">XML Ui Learning</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="_5500"> <strike >  ₹5500/-</strike> </string>
 </resources>

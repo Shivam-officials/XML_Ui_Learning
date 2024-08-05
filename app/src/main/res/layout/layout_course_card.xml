@@ -105,8 +105,7 @@
                         android:id="@+id/OriginalPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:text="₹5500/-"
+                        android:text="@string/_5500"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="18sp"
                         android:textStyle="normal" />
