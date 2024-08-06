@@ -89,6 +89,8 @@
             <!--call now section -->
             <include layout="@layout/layout_call_now" />
         </LinearLayout>
+
+
     </ScrollView>
 
     <!--    bottom card with price-->
