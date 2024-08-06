@@ -88,10 +88,20 @@
 
             <!--call now section -->
             <include layout="@layout/layout_call_now" />
+
+
+            <!--            lessons-->
+            <include layout="@layout/layout_lesson_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"/>
+
+
         </LinearLayout>
 
 
     </ScrollView>
+
 
     <!--    bottom card with price-->
     <include layout="@layout/layout_bottom_card" />

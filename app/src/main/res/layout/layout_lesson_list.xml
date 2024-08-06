@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lessons_List"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff2f0">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="that was just the beginning,\nyou will also learn"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <include
+        android:id="@+id/lesson_list_card_1"
+        layout="@layout/layout_lesson_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        />
+
+    <include
+        android:id="@+id/lesson_list_card_2"
+        layout="@layout/layout_lesson_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        />
+
+    <include
+        android:id="@+id/lesson_list_card_3"
+        layout="@layout/layout_lesson_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        />
+
+    <include
+        android:id="@+id/lesson_list_card_4"
+        layout="@layout/layout_lesson_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        />
+
+    <include
+        android:id="@+id/lesson_list_card_5"
+        layout="@layout/layout_lesson_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        />
+
+
+
+
+
+</LinearLayout>
