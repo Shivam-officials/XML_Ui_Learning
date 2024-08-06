@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -7,6 +8,7 @@ android {
     namespace = "com.shivam.xmluilearning"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "com.shivam.xmluilearning"
         minSdk = 24
@@ -15,6 +17,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    viewBinding {
+        enable = true
     }
 
     buildTypes {
@@ -33,6 +39,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
+
 }
 
 dependencies {

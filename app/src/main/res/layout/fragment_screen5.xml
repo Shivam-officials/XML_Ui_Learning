@@ -73,7 +73,9 @@
 
 
             <!--            benefits layout -->
-            <include layout="@layout/layout_benefits" />
+            <include
+                android:id="@+id/benefits_card"
+                layout="@layout/layout_benefits"/>
 
 
             <!--        why choose us block -->
@@ -92,6 +94,7 @@
 
             <!--            lessons-->
             <include layout="@layout/layout_lesson_list"
+                android:id="@+id/id_layout_lesson_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"/>
