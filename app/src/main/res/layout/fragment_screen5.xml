@@ -103,7 +103,21 @@
                 android:layout_height="wrap_content"
                 />
 
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                />
 
+<!--            download our app section-->
+            <include layout="@layout/layout_download_app_card"
+                />
+
+<!--            about us -->
+            <include layout="@layout/layout_about_us"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                />
 
         </LinearLayout>
 
