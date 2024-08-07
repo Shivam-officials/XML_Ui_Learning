@@ -32,4 +32,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/id_schools_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        tools:itemCount="3"
+        tools:listitem="@layout/layout_school_details"
+        app:layout_constraintBottom_toTopOf="@+id/id_add_school"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_btn_go_to_screen5"
+        app:layout_constraintVertical_bias="0.5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
