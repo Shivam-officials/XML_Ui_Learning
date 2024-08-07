@@ -9,11 +9,22 @@
     android:elevation="20dp"
     tools:context=".MainActivity">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:name="com.shivam.xmluilearning.screen5"
-            android:id="@+id/fragment_container"
+
+        <fragment
+            android:id="@+id/fragmentContainerView"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/my_nav" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

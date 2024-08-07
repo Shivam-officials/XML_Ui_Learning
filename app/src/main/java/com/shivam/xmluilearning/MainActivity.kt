@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.shivam.xmluilearning.databinding.ActivityMainBinding
 import com.shivam.xmluilearning.databinding.LayoutBenefitsBinding
 
@@ -30,17 +33,8 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // Check if the fragment container is null to avoid overlapping fragments
-        if (savedInstanceState == null) {
-            // Create an instance of the fragment
-            val fragmentScreen5 = screen5()
-            val firebaseLearningFragment = FragmentFirebaseLearning()
+    val navController = findNavController(R.id.fragmentContainerView)
 
-            // Attach the fragment to the activity
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container,firebaseLearningFragment )
-                .commit()
-        }
 
     }
 }

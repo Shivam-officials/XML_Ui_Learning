@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/my_nav">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/screen5"
+        android:name="com.shivam.xmluilearning.screen5"
+        android:label="screen5"
+        tools:layout="@layout/fragment_screen5" />
+
+    <fragment
+        android:id="@+id/fragment_firebase_learning"
+        android:name="com.shivam.xmluilearning.FragmentFirebaseLearning"
+        android:label="fragment_firebase_learning"
+        tools:layout="@layout/fragment_firebase_learning" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.shivam.xmluilearning.homeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_fragment_firebase_learning"
+            app:destination="@id/fragment_firebase_learning" />
+        <action
+            android:id="@+id/action_homeFragment_to_screen5"
+            app:destination="@id/screen5" />
+    </fragment>
+
 
 </navigation>
