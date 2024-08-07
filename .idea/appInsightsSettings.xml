@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.shivam.xmluilearning" />
+                  <option name="mobileSdkAppId" value="1:82454037882:android:3a4d1011a1d917b22ec2c3" />
+                  <option name="projectId" value="xml-ui-learning" />
+                  <option name="projectNumber" value="82454037882" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
