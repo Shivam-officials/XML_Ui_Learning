@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.shivam.xmluilearning.databinding.FragmentFirebaseLearningBinding
@@ -66,6 +67,7 @@ class FragmentFirebaseLearning : Fragment() {
                     binding.idSchoolAddress.text = null
                     binding.idRatings.text = null
                     binding.idRatingCount.text = null
+                    findNavController().navigateUp()
                 }
                 // if the data is not inserted successfully
                 .addOnCanceledListener {

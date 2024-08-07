@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentFirebaseLearning">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:id="@+id/id_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="School details"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/id_school_image"
+        android:layout_width="237dp"
+        android:layout_height="178dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_page_title"
+        android:src="@drawable/car_img" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/id_driving_school_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="16dp"
+        android:height="40dp"
+        android:hint="Enter Driving School Name"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/id_school_image"
+        app:layout_constraintStart_toStartOf="@+id/id_school_image"
+        app:layout_constraintTop_toBottomOf="@+id/id_school_image" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/id_school_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="Enter School Address"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/id_driving_school_name"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/id_driving_school_name"
+        app:layout_constraintTop_toBottomOf="@+id/id_driving_school_name" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/id_ratings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:hint="Enter Ratings"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/id_rating_count"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_school_address" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/id_rating_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Rating Count"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/id_ratings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/id_ratings"
+        app:layout_constraintTop_toTopOf="@+id/id_ratings" />
+
+    <Button
+        android:id="@+id/id_update_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
+        android:text="update"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_rating_count" />
+</androidx.constraintlayout.widget.ConstraintLayout>

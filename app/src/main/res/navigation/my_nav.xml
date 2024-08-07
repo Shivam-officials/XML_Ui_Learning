@@ -27,6 +27,18 @@
         <action
             android:id="@+id/action_homeFragment_to_screen5"
             app:destination="@id/screen5" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentUpdateData"
+            app:destination="@id/fragmentUpdateData" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentUpdateData"
+        android:name="com.shivam.xmluilearning.FragmentUpdateData"
+        android:label="fragment_update_data"
+        tools:layout="@layout/fragment_update_data" >
+        <action
+            android:id="@+id/action_fragmentUpdateData_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
 
