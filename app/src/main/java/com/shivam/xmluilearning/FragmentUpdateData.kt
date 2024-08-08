@@ -21,6 +21,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.shivam.xmluilearning.databinding.FragmentUpdateDataBinding
 import com.shivam.xmluilearning.model.School
 
@@ -33,6 +34,7 @@ import com.shivam.xmluilearning.model.School
 class FragmentUpdateData : Fragment() {
 
     private var  firebaseRef  = FirebaseDatabase.getInstance().getReference("schools list")
+    private var storageRef = FirebaseStorage.getInstance().getReference("images")
      private  val args : FragmentUpdateDataArgs by navArgs()
 
     private var _binding: FragmentUpdateDataBinding? = null
@@ -40,7 +42,6 @@ class FragmentUpdateData : Fragment() {
 
     private lateinit var imageUri: Uri
 
-    private lateinit var imagePicker:ActivityResultLauncher<ActivityResultContracts.GetContent>
 
     /**
      * Called to do initial creation of a fragment.  This is called after
@@ -93,12 +94,18 @@ class FragmentUpdateData : Fragment() {
         // update the data in the firebase
         binding.idUpdateButton.setOnClickListener {
             updateData(args.id)
+            findNavController().navigateUp()
         }
 
         // pick image from the gallery and set it to the image view
         val imagePicker = registerForActivityResult(ActivityResultContracts.GetContent()){
-            imageUri = it!!
-            binding.idSchoolImage.setImageURI(it)
+            if (it != null){
+                imageUri = it
+                binding.idSchoolImage.setImageURI(it)
+            }else{
+                Toast.makeText(activity, "select an image please", Toast.LENGTH_SHORT).show()
+            }
+
         }
         binding.idSchoolImage.setOnClickListener {
             imagePicker.launch("image/*")
@@ -134,11 +141,98 @@ class FragmentUpdateData : Fragment() {
     }
 
     private fun updateData( id: String ) {
+            val name = binding.idDrivingSchoolName.text.toString()
+            val address = binding.idSchoolAddress.text.toString()
+            val ratings = binding.idRatings.text.toString()
+            val ratingCount = binding.idRatingCount.text.toString()
+
+            // make a unique key for every data entry
+            val schoolId = firebaseRef.push().key!!
+
+            // make the data class that u want to insert with the key
+            var school :School
+
+            // check if the fields are not empty
+            if (name.isNotBlank() && address.isNotBlank() && ratings.isNotBlank() && ratingCount.isNotBlank() && imageUri != null) {
+                val storageId =
+                    storageRef.child(schoolId).putFile(imageUri!!)
+                        .addOnCompleteListener{
+                            it.result.metadata?.reference?.downloadUrl?.addOnSuccessListener {uri->
+                                Toast.makeText(context, "image saved", Toast.LENGTH_SHORT).show()
+
+
+                                school = School(schoolId, name, address, ratings, ratingCount, uri.toString())
+                                // insert the data into the database
+                                firebaseRef.child(schoolId).setValue(school)
+                                    // if the data is inserted successfully
+                                    .addOnCompleteListener {
+                                        Toast.makeText(context, "data saved to RLDB", Toast.LENGTH_SHORT).show()
+                                        binding.idDrivingSchoolName.text = null
+                                        binding.idSchoolAddress.text = null
+                                        binding.idRatings.text = null
+                                        binding.idRatingCount.text = null
+                                        findNavController().navigateUp()
+                                    }
+                                    // if the data is not inserted successfully
+                                    .addOnCanceledListener {
+                                        Toast.makeText(context, "data saving failed for RLDB", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+
+                        }
+                        .addOnCanceledListener {
+                            Toast.makeText(context, "Image saved failed", Toast.LENGTH_SHORT).show()
+                        }
+            } else
+            // if the fields are empty
+            {
+                binding.idDrivingSchoolName.error = "fill this field"
+                binding.idSchoolAddress.error = "fill this field"
+                binding.idRatings.error = "fill this field"
+                binding.idRatingCount.error = "fill this field"
+
+                Toast.makeText(activity, "plz fill all the fields", Toast.LENGTH_LONG).show()
+            }
+
+            /**
+            // check if the fields are not empty
+            if (name.isNotBlank() && address.isNotBlank() && ratings.isNotBlank() && ratingCount.isNotBlank()) {
+
+            // insert the data into the database
+            firebaseRef.child(schoolId).setValue(school)
+            // if the data is inserted successfully
+            .addOnCompleteListener {
+            Toast.makeText(activity, "success", Toast.LENGTH_SHORT).show()
+            binding.idDrivingSchoolName.text = null
+            binding.idSchoolAddress.text = null
+            binding.idRatings.text = null
+            binding.idRatingCount.text = null
+            findNavController().navigateUp()
+            }
+            // if the data is not inserted successfully
+            .addOnCanceledListener {
+            Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show()
+            }
+
+            } else
+            // if the fields are empty
+            {
+            binding.idDrivingSchoolName.error = "fill this field"
+            binding.idSchoolAddress.error = "fill this field"
+            binding.idRatings.error = "fill this field"
+            binding.idRatingCount.error = "fill this field"
+
+            Toast.makeText(activity, "plz fill all the fields", Toast.LENGTH_LONG).show()
+            }
+             */
+
+       /**
 //        TODO("Not yet implemented")
         val name = binding.idDrivingSchoolName.text.toString()
         val address = binding.idSchoolAddress.text.toString()
         val ratings = binding.idRatings.text.toString()
         val ratingCount = binding.idRatingCount.text.toString()
+
 
         val school = School(id,name,address,ratings,ratingCount)
 
@@ -153,6 +247,7 @@ class FragmentUpdateData : Fragment() {
                 Toast.makeText(context, "data not updated", Toast.LENGTH_SHORT).show()
             }
 
+        */
     }
 
     // get the data from the firebase

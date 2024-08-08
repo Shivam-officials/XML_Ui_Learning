@@ -7,5 +7,5 @@ data class School(
     var address: String? = null,
     var ratings: String? = null,
     var ratingCount: String? = null,
-    var schoolImage: String? = null
+    var schoolImageUrl: String? = null
 )

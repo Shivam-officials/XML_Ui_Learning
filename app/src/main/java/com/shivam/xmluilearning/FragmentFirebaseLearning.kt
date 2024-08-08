@@ -25,7 +25,7 @@ class FragmentFirebaseLearning : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var firebaseRef: DatabaseReference
-    private  lateinit var storageRef: StorageReference
+    private lateinit var storageRef: StorageReference
     private var imageUri: Uri? = null
 
     override fun onCreateView(
@@ -34,8 +34,8 @@ class FragmentFirebaseLearning : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_firebase_learning, container, false)
-        _binding = FragmentFirebaseLearningBinding.inflate(inflater,container,false)
-       return binding.root
+        _binding = FragmentFirebaseLearningBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,20 +45,25 @@ class FragmentFirebaseLearning : Fragment() {
         storageRef = FirebaseStorage.getInstance().getReference("images")
 
         // pick image from the gallery and set it to the image view
-        val imagePicker = registerForActivityResult(ActivityResultContracts.GetContent()){
-            imageUri = it!!
-            binding.idSchoolImage.setImageURI(it)
+        val imagePicker = registerForActivityResult(ActivityResultContracts.GetContent()) {
+            if (it != null) {
+                imageUri = it
+                binding.idSchoolImage.setImageURI(it)
+            } else {
+                Toast.makeText(activity, "select a image plz", Toast.LENGTH_SHORT).show()
+            }
         }
         binding.idSchoolImage.setOnClickListener {
             imagePicker.launch("image/*")
+
+
         }
 
-        binding.idUploadButton.setOnClickListener{
+        binding.idUploadButton.setOnClickListener {
             saveData()
         }
 
     }
-
 
 
     private fun saveData() {
@@ -71,27 +76,55 @@ class FragmentFirebaseLearning : Fragment() {
         val schoolId = firebaseRef.push().key!!
 
         // make the data class that u want to insert with the key
-        val school = School(schoolId, name, address, ratings, ratingCount)
+        var school: School
+
 
         // check if the fields are not empty
-        if (name.isNotBlank() && address.isNotBlank() && ratings.isNotBlank() && ratingCount.isNotBlank()) {
+        if (name.isNotBlank() && address.isNotBlank() && ratings.isNotBlank() && ratingCount.isNotBlank() && imageUri != null) {
+            val storageId =
+                storageRef.child(schoolId).putFile(imageUri!!)
+                    .addOnCompleteListener {
+                        it.result.metadata?.reference?.downloadUrl?.addOnSuccessListener { uri ->
+                            Toast.makeText(activity, "image saved", Toast.LENGTH_SHORT).show()
 
-            // insert the data into the database
-            firebaseRef.child(schoolId).setValue(school)
-                // if the data is inserted successfully
-                .addOnCompleteListener {
-                    Toast.makeText(activity, "success", Toast.LENGTH_SHORT).show()
-                    binding.idDrivingSchoolName.text = null
-                    binding.idSchoolAddress.text = null
-                    binding.idRatings.text = null
-                    binding.idRatingCount.text = null
-                    findNavController().navigateUp()
-                }
-                // if the data is not inserted successfully
-                .addOnCanceledListener {
-                    Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show()
-                }
 
+                            school = School(
+                                schoolId,
+                                name,
+                                address,
+                                ratings,
+                                ratingCount,
+                                uri.toString()
+                            )
+                            // insert the data into the database
+                            firebaseRef.child(schoolId).setValue(school)
+                                // if the data is inserted successfully
+                                .addOnCompleteListener {
+                                    Toast.makeText(
+                                        activity,
+                                        "data saved to RLDB",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    binding.idDrivingSchoolName.text = null
+                                    binding.idSchoolAddress.text = null
+                                    binding.idRatings.text = null
+                                    binding.idRatingCount.text = null
+                                    findNavController().navigateUp()
+                                }
+                                // if the data is not inserted successfully
+                                .addOnCanceledListener {
+                                    Toast.makeText(
+                                        activity,
+                                        "data saving failed for RLDB",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                        }
+
+                    }
+                    .addOnCanceledListener {
+                        Toast.makeText(activity, "Image saved failed", Toast.LENGTH_SHORT).show()
+                    }
         } else
         // if the fields are empty
         {
@@ -102,6 +135,38 @@ class FragmentFirebaseLearning : Fragment() {
 
             Toast.makeText(activity, "plz fill all the fields", Toast.LENGTH_LONG).show()
         }
+
+        /**
+        // check if the fields are not empty
+        if (name.isNotBlank() && address.isNotBlank() && ratings.isNotBlank() && ratingCount.isNotBlank()) {
+
+        // insert the data into the database
+        firebaseRef.child(schoolId).setValue(school)
+        // if the data is inserted successfully
+        .addOnCompleteListener {
+        Toast.makeText(activity, "success", Toast.LENGTH_SHORT).show()
+        binding.idDrivingSchoolName.text = null
+        binding.idSchoolAddress.text = null
+        binding.idRatings.text = null
+        binding.idRatingCount.text = null
+        findNavController().navigateUp()
+        }
+        // if the data is not inserted successfully
+        .addOnCanceledListener {
+        Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show()
+        }
+
+        } else
+        // if the fields are empty
+        {
+        binding.idDrivingSchoolName.error = "fill this field"
+        binding.idSchoolAddress.error = "fill this field"
+        binding.idRatings.error = "fill this field"
+        binding.idRatingCount.error = "fill this field"
+
+        Toast.makeText(activity, "plz fill all the fields", Toast.LENGTH_LONG).show()
+        }
+         */
     }
 
 }
