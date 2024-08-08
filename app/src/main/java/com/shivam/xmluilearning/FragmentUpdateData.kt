@@ -1,5 +1,8 @@
 package com.shivam.xmluilearning
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,8 +10,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.PackageManagerCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.gms.common.wrappers.PackageManagerWrapper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -28,9 +35,34 @@ class FragmentUpdateData : Fragment() {
     private var  firebaseRef  = FirebaseDatabase.getInstance().getReference("schools list")
      private  val args : FragmentUpdateDataArgs by navArgs()
 
-
     private var _binding: FragmentUpdateDataBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var imageUri: Uri
+
+    private lateinit var imagePicker:ActivityResultLauncher<ActivityResultContracts.GetContent>
+
+    /**
+     * Called to do initial creation of a fragment.  This is called after
+     * [.onAttach] and before
+     * [.onCreateView].
+     *
+     *
+     * Note that this can be called while the fragment's activity is
+     * still in the process of being created.  As such, you can not rely
+     * on things like the activity's content view hierarchy being initialized
+     * at this point.  If you want to do work once the activity itself is
+     * created, add a [androidx.lifecycle.LifecycleObserver] on the
+     * activity's Lifecycle, removing it when it receives the
+     * [Lifecycle.State.CREATED] callback.
+     *
+     *
+     * Any restored child fragments will be created before the base
+     * `Fragment.onCreate` method returns.
+     *
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +72,8 @@ class FragmentUpdateData : Fragment() {
 //        return inflater.inflate(R.layout.fragment_update_data, container, false)
 
         _binding = FragmentUpdateDataBinding.inflate(inflater,container,false)
+
+
         return binding.root
     }
 
@@ -61,6 +95,16 @@ class FragmentUpdateData : Fragment() {
             updateData(args.id)
         }
 
+        // pick image from the gallery and set it to the image view
+        val imagePicker = registerForActivityResult(ActivityResultContracts.GetContent()){
+            imageUri = it!!
+            binding.idSchoolImage.setImageURI(it)
+        }
+        binding.idSchoolImage.setOnClickListener {
+            imagePicker.launch("image/*")
+        }
+
+
         binding.idDeleteBtn.setOnClickListener {
             deleteData(args.id)
         }
@@ -71,7 +115,9 @@ class FragmentUpdateData : Fragment() {
 
     }
 
-     fun deleteData(id: String) {
+
+
+    fun deleteData(id: String) {
 //        TODO("Not yet implemented")
 
 

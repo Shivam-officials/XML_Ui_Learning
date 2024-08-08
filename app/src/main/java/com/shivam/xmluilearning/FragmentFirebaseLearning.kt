@@ -1,16 +1,21 @@
 package com.shivam.xmluilearning
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.shivam.xmluilearning.databinding.FragmentFirebaseLearningBinding
 import com.shivam.xmluilearning.model.School
+import java.net.URI
 
 
 class FragmentFirebaseLearning : Fragment() {
@@ -20,7 +25,8 @@ class FragmentFirebaseLearning : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var firebaseRef: DatabaseReference
-
+    private  lateinit var storageRef: StorageReference
+    private var imageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,12 +42,24 @@ class FragmentFirebaseLearning : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         firebaseRef = FirebaseDatabase.getInstance().getReference("schools list")
+        storageRef = FirebaseStorage.getInstance().getReference("images")
+
+        // pick image from the gallery and set it to the image view
+        val imagePicker = registerForActivityResult(ActivityResultContracts.GetContent()){
+            imageUri = it!!
+            binding.idSchoolImage.setImageURI(it)
+        }
+        binding.idSchoolImage.setOnClickListener {
+            imagePicker.launch("image/*")
+        }
 
         binding.idUploadButton.setOnClickListener{
             saveData()
         }
 
     }
+
+
 
     private fun saveData() {
         val name = binding.idDrivingSchoolName.text.toString()
