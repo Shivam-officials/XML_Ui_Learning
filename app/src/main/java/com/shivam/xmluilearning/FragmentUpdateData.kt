@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -53,9 +54,9 @@ class FragmentUpdateData : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.idUpdateButton.setOnClickListener {
-//            updateData(args.id)
-//        }
+        binding.idUpdateButton.setOnClickListener {
+            updateData(args.id)
+        }
         fillFieldsFromIdFromFirebase()
 
     }
@@ -69,7 +70,16 @@ class FragmentUpdateData : Fragment() {
 
         val school = School(id,name,address,ratings,ratingCount)
 
-//        firebaseRef.child(id).updateChildren()
+        firebaseRef.child(id).setValue(school)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(context, "data updated", Toast.LENGTH_SHORT).show()
+                    findNavController().navigateUp()
+                }
+            }
+            .addOnCanceledListener {
+                Toast.makeText(context, "data not updated", Toast.LENGTH_SHORT).show()
+            }
 
     }
 
