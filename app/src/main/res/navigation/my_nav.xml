@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_firebase_learning" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.shivam.xmluilearning.homeFragment"
+        android:name="com.shivam.xmluilearning.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_fragmentUpdateData_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
 
 

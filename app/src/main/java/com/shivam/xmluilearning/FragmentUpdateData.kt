@@ -1,13 +1,19 @@
 package com.shivam.xmluilearning
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.navArgs
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.shivam.xmluilearning.databinding.FragmentUpdateDataBinding
-
-
+import com.shivam.xmluilearning.model.School
 
 
 /**
@@ -16,6 +22,10 @@ import com.shivam.xmluilearning.databinding.FragmentUpdateDataBinding
  * create an instance of this fragment.
  */
 class FragmentUpdateData : Fragment() {
+
+    private var  firebaseRef  = FirebaseDatabase.getInstance().getReference("schools list")
+     private  val args : FragmentUpdateDataArgs by navArgs()
+
 
     private var _binding: FragmentUpdateDataBinding? = null
     private val binding get() = _binding!!
@@ -43,6 +53,77 @@ class FragmentUpdateData : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        binding.idUpdateButton.setOnClickListener {
+//            updateData(args.id)
+//        }
+        fillFieldsFromIdFromFirebase()
 
+    }
+
+    private fun updateData( id: String ) {
+//        TODO("Not yet implemented")
+        val name = binding.idDrivingSchoolName.text.toString()
+        val address = binding.idSchoolAddress.text.toString()
+        val ratings = binding.idRatings.text.toString()
+        val ratingCount = binding.idRatingCount.text.toString()
+
+        val school = School(id,name,address,ratings,ratingCount)
+
+//        firebaseRef.child(id).updateChildren()
+
+    }
+
+    // get the data from the firebase
+    private fun fillFieldsFromIdFromFirebase(id: String = args.id) {
+
+
+        val schoolData =
+            firebaseRef.orderByKey().equalTo(id).addListenerForSingleValueEvent(object : ValueEventListener {
+                /**
+                 * This method will be called with a snapshot of the data at this location. It will also be called
+                 * each time that data changes.
+                 *
+                 * @param snapshot The current data at the location
+                 */
+                override fun onDataChange(snapshot: DataSnapshot) {
+    //                    TODO("Not yet implemented")
+                    val dataReceived: School
+                    if (snapshot.exists()) {
+                        Log.d("UpdateDataFragment", "onDataChange: $snapshot")
+                        dataReceived = snapshot.children.first().getValue(School::class.java)!!
+                        with(binding) {
+                            idDrivingSchoolName.setText(dataReceived.name)
+                            idSchoolAddress.setText(dataReceived.address)
+                            idRatings.setText(dataReceived.ratings)
+                            idRatingCount.setText(dataReceived.ratingCount)
+                        }
+                    }
+
+
+                }
+
+                /**
+                 * This method will be triggered in the event that this listener either failed at the server, or
+                 * is removed as a result of the security and Firebase Database rules. For more information on
+                 * securing your data, see: [ Security
+     * Quickstart](https://firebase.google.com/docs/database/security/quickstart)
+                 *
+                 * @param error A description of the error that occurred
+                 */
+                override fun onCancelled(error: DatabaseError) {
+    //                    TODO("Not yet implemented")
+                    Toast.makeText(
+                        context,
+                        "error in fetching the data from firebase",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+
+
+
+//        binding.apply {
+//            idDrivingSchoolName.setText(id)
+//        }
     }
 }

@@ -2,7 +2,10 @@ package com.shivam.xmluilearning.adaptor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.shivam.xmluilearning.HomeFragmentDirections
+import com.shivam.xmluilearning.R
 import com.shivam.xmluilearning.databinding.LayoutSchoolDetailsBinding
 import com.shivam.xmluilearning.model.School
 
@@ -75,11 +78,17 @@ class SchoolCardAdaptor( private val schools: List<School>): RecyclerView.Adapte
 
         val currentItem = schools[position]
         holder.apply {
+
             binding.title.text = currentItem.name
             binding.location.text = currentItem.address
             binding.rating.text = currentItem.ratings
             binding.ratingCount.text = currentItem.ratingCount
+            binding.idSchoolCardContainer.setOnClickListener {
 
+                val action = HomeFragmentDirections.actionHomeFragmentToFragmentUpdateData(schools[position].id!!)
+
+                findNavController(holder.itemView).navigate(action)
+            }
         }
     }
 }

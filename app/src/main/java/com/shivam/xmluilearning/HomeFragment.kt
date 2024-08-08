@@ -1,6 +1,7 @@
 package com.shivam.xmluilearning
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -24,10 +24,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [homeFragment.newInstance] factory method to
+ * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class homeFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -94,6 +94,7 @@ class homeFragment : Fragment() {
                 schoolList.clear()
                 // loop through the data and add it to the list
                 if (snapshot.exists()){
+                    Log.d("HomeFragment", "onDataChange: ${snapshot.children.elementAt(4)}")
                    for (school in snapshot.children){
                       val schoolData = school.getValue(School::class.java)
                        schoolList.add(schoolData!!)
