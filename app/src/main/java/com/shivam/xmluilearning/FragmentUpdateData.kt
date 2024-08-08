@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -54,11 +55,36 @@ class FragmentUpdateData : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // update the data in the firebase
         binding.idUpdateButton.setOnClickListener {
             updateData(args.id)
         }
+
+        binding.idDeleteBtn.setOnClickListener {
+            deleteData(args.id)
+        }
+
+        // get the data from the firebase to populate the fields
         fillFieldsFromIdFromFirebase()
 
+
+    }
+
+     fun deleteData(id: String) {
+//        TODO("Not yet implemented")
+
+
+        // delete the data from the firebase
+        firebaseRef.child(id).removeValue()
+            .addOnCompleteListener{
+                if (it.isSuccessful) {
+                    Toast.makeText(context, "data deleted", Toast.LENGTH_SHORT).show()
+                    findNavController().navigateUp()
+                }
+            }.addOnCanceledListener {
+                Toast.makeText(context, "data not deleted", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun updateData( id: String ) {

@@ -2,8 +2,11 @@ package com.shivam.xmluilearning.adaptor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.database.FirebaseDatabase
 import com.shivam.xmluilearning.HomeFragmentDirections
 import com.shivam.xmluilearning.R
 import com.shivam.xmluilearning.databinding.LayoutSchoolDetailsBinding
@@ -88,6 +91,32 @@ class SchoolCardAdaptor( private val schools: List<School>): RecyclerView.Adapte
                 val action = HomeFragmentDirections.actionHomeFragmentToFragmentUpdateData(schools[position].id!!)
 
                 findNavController(holder.itemView).navigate(action)
+            }
+
+            binding.idSchoolCardContainer.setOnLongClickListener {
+
+
+                MaterialAlertDialogBuilder(holder.itemView.context)
+                    .setTitle("delete item permamentaly ")
+                    .setMessage("R u sure?")
+                    .setPositiveButton("yes"){  _,_ ->
+                        val firebaseRef = FirebaseDatabase.getInstance().getReference("schools list")
+                        firebaseRef.child(currentItem.id.toString()).removeValue()
+                            .addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    Toast.makeText(holder.itemView.context, "item deleted successfully", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            .addOnCanceledListener{
+                                Toast.makeText(holder.itemView.context, "error $it", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                    }
+                    .setNegativeButton("NO"){_,_ ->
+                        Toast.makeText(holder.itemView.context, "item not deleted", Toast.LENGTH_SHORT).show()
+                    }
+                    .show()
+            return@setOnLongClickListener true
             }
         }
     }
