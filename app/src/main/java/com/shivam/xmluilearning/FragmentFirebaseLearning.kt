@@ -48,6 +48,7 @@ class FragmentFirebaseLearning : Fragment() {
         val imagePicker = registerForActivityResult(ActivityResultContracts.GetContent()) {
             if (it != null) {
                 imageUri = it
+//                binding.idPageTitle.text = it.toString()
                 binding.idSchoolImage.setImageURI(it)
             } else {
                 Toast.makeText(activity, "select a image plz", Toast.LENGTH_SHORT).show()

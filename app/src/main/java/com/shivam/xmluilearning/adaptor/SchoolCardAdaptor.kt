@@ -11,6 +11,7 @@ import com.shivam.xmluilearning.HomeFragmentDirections
 import com.shivam.xmluilearning.R
 import com.shivam.xmluilearning.databinding.LayoutSchoolDetailsBinding
 import com.shivam.xmluilearning.model.School
+import com.squareup.picasso.Picasso
 
 class SchoolCardAdaptor( private val schools: List<School>): RecyclerView.Adapter<SchoolCardAdaptor.ViewHolder>() {
     class ViewHolder( val binding: LayoutSchoolDetailsBinding):RecyclerView.ViewHolder(binding.root) {
@@ -86,6 +87,7 @@ class SchoolCardAdaptor( private val schools: List<School>): RecyclerView.Adapte
             binding.location.text = currentItem.address
             binding.rating.text = currentItem.ratings
             binding.ratingCount.text = currentItem.ratingCount
+            Picasso.get().load(currentItem.schoolImageUrl).into(binding.carImage)
             binding.idSchoolCardContainer.setOnClickListener {
 
                 val action = HomeFragmentDirections.actionHomeFragmentToFragmentUpdateData(schools[position].id!!)

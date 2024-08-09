@@ -94,7 +94,7 @@ class HomeFragment : Fragment() {
                 schoolList.clear()
                 // loop through the data and add it to the list
                 if (snapshot.exists()){
-                    Log.d("HomeFragment", "onDataChange: ${snapshot.children.elementAt(4)}")
+                    Log.d("HomeFragment", "onDataChange: ${snapshot.children}")
                    for (school in snapshot.children){
                       val schoolData = school.getValue(School::class.java)
                        schoolList.add(schoolData!!)

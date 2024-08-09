@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.shivam.xmluilearning.databinding.FragmentUpdateDataBinding
 import com.shivam.xmluilearning.model.School
+import com.squareup.picasso.Picasso
 
 
 /**
@@ -40,7 +41,7 @@ class FragmentUpdateData : Fragment() {
     private var _binding: FragmentUpdateDataBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var imageUri: Uri
+    private  var imageUri: Uri? = null
 
 
     /**
@@ -153,9 +154,9 @@ class FragmentUpdateData : Fragment() {
             var school :School
 
             // check if the fields are not empty
-            if (name.isNotBlank() && address.isNotBlank() && ratings.isNotBlank() && ratingCount.isNotBlank() && imageUri != null) {
-                val storageId =
-                    storageRef.child(schoolId).putFile(imageUri!!)
+            if (name.isNotBlank() && address.isNotBlank() && ratings.isNotBlank() && ratingCount.isNotBlank()) {
+                imageUri?.let { uri ->
+                    storageRef.child(schoolId).putFile(uri)
                         .addOnCompleteListener{
                             it.result.metadata?.reference?.downloadUrl?.addOnSuccessListener {uri->
                                 Toast.makeText(context, "image saved", Toast.LENGTH_SHORT).show()
@@ -183,6 +184,8 @@ class FragmentUpdateData : Fragment() {
                         .addOnCanceledListener {
                             Toast.makeText(context, "Image saved failed", Toast.LENGTH_SHORT).show()
                         }
+                }
+
             } else
             // if the fields are empty
             {
@@ -273,6 +276,8 @@ class FragmentUpdateData : Fragment() {
                             idSchoolAddress.setText(dataReceived.address)
                             idRatings.setText(dataReceived.ratings)
                             idRatingCount.setText(dataReceived.ratingCount)
+                            Picasso.get().load(dataReceived.schoolImageUrl).into(idSchoolImage)
+
                         }
                     }
 

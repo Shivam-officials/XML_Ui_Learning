@@ -22,19 +22,22 @@
     android:orientation="horizontal">
 
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="10dp">
-            <ImageView
-                android:id="@+id/courseCard"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/course_card_round"
-                android:scaleType="centerCrop"
-                android:src="@drawable/_2w_licence" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cardCornerRadius="10dp">
 
-        </androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/courseImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/course_card_round"
+            android:maxWidth="150dp"
+            android:maxHeight="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/_2w_licence" />
+
+    </androidx.cardview.widget.CardView>
         <!--                    course image view-->
 
 
