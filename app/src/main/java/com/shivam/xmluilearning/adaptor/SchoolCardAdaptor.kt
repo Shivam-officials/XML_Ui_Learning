@@ -7,6 +7,7 @@ import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import com.shivam.xmluilearning.HomeFragmentDirections
 import com.shivam.xmluilearning.R
 import com.shivam.xmluilearning.databinding.LayoutSchoolDetailsBinding
@@ -78,7 +79,6 @@ class SchoolCardAdaptor( private val schools: List<School>): RecyclerView.Adapte
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        TODO("Not yet implemented")
 
         val currentItem = schools[position]
         holder.apply {
@@ -102,6 +102,16 @@ class SchoolCardAdaptor( private val schools: List<School>): RecyclerView.Adapte
                     .setTitle("delete item permamentaly ")
                     .setMessage("R u sure?")
                     .setPositiveButton("yes"){  _,_ ->
+
+                        val storageRef = FirebaseStorage.getInstance().getReference("images")
+
+
+                        // delete the image from the storage
+                        storageRef.child(currentItem.id.toString()).delete()
+                            .addOnSuccessListener {
+                                Toast.makeText(holder.itemView.context, "item image deleted successfully", Toast.LENGTH_SHORT).show()
+                            }
+
                         val firebaseRef = FirebaseDatabase.getInstance().getReference("schools list")
                         firebaseRef.child(currentItem.id.toString()).removeValue()
                             .addOnCompleteListener {

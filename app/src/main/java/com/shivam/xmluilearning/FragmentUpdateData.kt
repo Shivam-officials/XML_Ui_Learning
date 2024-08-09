@@ -1,22 +1,16 @@
 package com.shivam.xmluilearning
 
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.PackageManagerCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.gms.common.wrappers.PackageManagerWrapper
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -125,9 +119,14 @@ class FragmentUpdateData : Fragment() {
 
 
 
-    fun deleteData(id: String) {
-//        TODO("Not yet implemented")
+    private fun deleteData(id: String) {
 
+        storageRef.child(id).delete().addOnSuccessListener {
+            Toast.makeText(context, "image got deleted from storage", Toast.LENGTH_SHORT).show()
+        }
+            .addOnCanceledListener {
+                Toast.makeText(context, "error in deleting image from storage ", Toast.LENGTH_SHORT).show()
+            }
 
         // delete the data from the firebase
         firebaseRef.child(id).removeValue()
@@ -236,7 +235,6 @@ class FragmentUpdateData : Fragment() {
         val ratings = binding.idRatings.text.toString()
         val ratingCount = binding.idRatingCount.text.toString()
 
-
         val school = School(id,name,address,ratings,ratingCount)
 
         firebaseRef.child(id).setValue(school)
@@ -266,7 +264,6 @@ class FragmentUpdateData : Fragment() {
                  * @param snapshot The current data at the location
                  */
                 override fun onDataChange(snapshot: DataSnapshot) {
-    //                    TODO("Not yet implemented")
                     val dataReceived: School
                     if (snapshot.exists()) {
                         Log.d("UpdateDataFragment", "onDataChange: $snapshot")
@@ -293,7 +290,6 @@ class FragmentUpdateData : Fragment() {
                  * @param error A description of the error that occurred
                  */
                 override fun onCancelled(error: DatabaseError) {
-    //                    TODO("Not yet implemented")
                     Toast.makeText(
                         context,
                         "error in fetching the data from firebase",
@@ -304,8 +300,6 @@ class FragmentUpdateData : Fragment() {
 
 
 
-//        binding.apply {
-//            idDrivingSchoolName.setText(id)
-//        }
+
     }
 }
