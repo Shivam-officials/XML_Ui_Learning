@@ -2,6 +2,7 @@ package com.shivam.xmluilearning
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +12,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.shivam.xmluilearning.databinding.FragmentFirebaseLearningBinding
 import com.shivam.xmluilearning.model.School
+import kotlinx.coroutines.tasks.await
 import java.net.URI
 
 
@@ -26,6 +31,8 @@ class FragmentFirebaseLearning : Fragment() {
 
     private lateinit var firebaseRef: DatabaseReference
     private lateinit var storageRef: StorageReference
+    private var fireStoreRef = Firebase.firestore
+    private val schoolListCollection = fireStoreRef.collection("school list")
     private var imageUri: Uri? = null
 
     override fun onCreateView(
@@ -44,6 +51,7 @@ class FragmentFirebaseLearning : Fragment() {
         firebaseRef = FirebaseDatabase.getInstance().getReference("schools list")
         storageRef = FirebaseStorage.getInstance().getReference("images")
 
+
         // pick image from the gallery and set it to the image view
         val imagePicker = registerForActivityResult(ActivityResultContracts.GetContent()) {
             if (it != null) {
@@ -61,8 +69,64 @@ class FragmentFirebaseLearning : Fragment() {
         }
 
         binding.idUploadButton.setOnClickListener {
-            saveData()
+            saveDataInFireStore()
         }
+
+    }
+
+    private  fun saveDataInFireStore() {
+        val name = binding.idDrivingSchoolName.text.toString()
+        val address = binding.idSchoolAddress.text.toString()
+        val ratings = binding.idRatings.text.toString()
+        val ratingCount = binding.idRatingCount.text.toString()
+        val id = schoolListCollection.document().id
+
+        storageRef.child(id).putFile(imageUri!!)
+            .addOnCompleteListener {
+                it.result.metadata?.reference?.downloadUrl?.addOnSuccessListener { uri ->
+                    Toast.makeText(activity, "image saved", Toast.LENGTH_SHORT).show()
+
+
+                    val schoolData = School(
+                        id,
+                        name,
+                        address,
+                        ratings,
+                        ratingCount,
+                        uri.toString()
+                    )
+                    // insert the data into the database
+                    schoolListCollection.document(id).set(schoolData)
+                        // if the data is inserted successfully
+                        .addOnCompleteListener {
+                            Toast.makeText(
+                                activity,
+                                "data saved to firestore",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            binding.idDrivingSchoolName.text = null
+                            binding.idSchoolAddress.text = null
+                            binding.idRatings.text = null
+                            binding.idRatingCount.text = null
+                            findNavController().navigateUp()
+                        }
+                        // if the data is not inserted successfully
+                        .addOnFailureListener {
+                            Toast.makeText(
+                                activity,
+                                "data saving failed for firestore",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                }
+
+            }
+            .addOnCanceledListener {
+                Toast.makeText(activity, "Image saved failed", Toast.LENGTH_SHORT).show()
+            }
+
+
+
 
     }
 
