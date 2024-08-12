@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.shivam.xmluilearning.databinding.FragmentUpdateDataBinding
 import com.shivam.xmluilearning.model.School
@@ -91,7 +92,7 @@ class FragmentUpdateData : Fragment() {
 
         // update the data in the firebase
         binding.idUpdateButton.setOnClickListener {
-            updateData(args.id)
+            updateDataFromFireStore(args.id)
             findNavController().navigateUp()
         }
 
@@ -120,11 +121,70 @@ class FragmentUpdateData : Fragment() {
 
     }
 
+    private fun updateDataFromFireStore(id: String) {
+
+            // get the data from the firebase to populate the fields
+            val schoolQuery = firestoreRef.whereEqualTo("id", id).get()
+
+            var documentId:String
+
+            schoolQuery.addOnSuccessListener { it ->
+                it.documents.first().let {
+                    //get the document id from the the to update it to the same document reference through id
+                    documentId = it.id
+                    val school = it.toObject(School::class.java)
+                    school?.let {
+                        with(binding) {
+                            idDrivingSchoolName.setText(it.name)
+                            idSchoolAddress.setText(it.address)
+                            idRatings.setText(it.ratings)
+                            idRatingCount.setText(it.ratingCount)
+                        }
+                        if (it.schoolImageUrl!= null) {
+                            Picasso.get().load(it.schoolImageUrl).into(binding.idSchoolImage)
+                        }
+                    }
+                }
+            }
+
+       imageUri?.let { it ->
+           storageRef.child(id).putFile(it)
+               .addOnCompleteListener {
+                  it.result.metadata?.reference?.downloadUrl?.addOnSuccessListener { Uri->
+                      val mapForUpdate = mutableMapOf(
+                          Pair("name",binding.idDrivingSchoolName.text.toString()),
+                          Pair("address",binding.idSchoolAddress.text.toString()),
+                          Pair("rating",binding.idRatings.text.toString()),
+                          Pair("ratingCount",binding.idRatingCount.text.toString()),
+                          Pair("schoolImageUrl",Uri)
+                      )
+
+                      // update the data in the firebase
+                      firestoreRef.document(id).set(mapForUpdate, SetOptions.merge())
+                  }
+
+
+
+               }
+       }
+
+        val mapForUpdate = mutableMapOf(
+            Pair("name",binding.idDrivingSchoolName.text.toString()),
+            Pair("address",binding.idSchoolAddress.text.toString()),
+            Pair("rating",binding.idRatings.text.toString()),
+            Pair("ratingCount",binding.idRatingCount.text.toString()),
+        )
+
+            // update the data in the firebase
+            firestoreRef.document(id).set(mapForUpdate, SetOptions.merge())
+
+    }
+
     private fun deleteDataFromFirestore(id: String) {
 
         storageRef.child(id).delete()
             .addOnSuccessListener {
-                Toast.makeText(activity, "image got deleted from storage", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "image got deleted from storage", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                 Toast.makeText(activity, "error in deleting image from storage ", Toast.LENGTH_SHORT)
@@ -144,7 +204,7 @@ class FragmentUpdateData : Fragment() {
 
     private fun fillFieldsFromIdFromFirebaseFireStore() {
         firestoreRef.document(args.id)
-            .addSnapshotListener { value,exception ->
+            .addSnapshotListener { value,exception -> //for realtime updates
                 exception?.let {
                     Toast.makeText(this.context, "exception in firebase fetching", Toast.LENGTH_SHORT).show()
                 }
@@ -208,6 +268,8 @@ class FragmentUpdateData : Fragment() {
                         school = School(
                             schoolId, name, address, ratings, ratingCount, uri.toString()
                         )
+
+
                         // insert the data into the database
                         firebaseRef.child(schoolId).setValue(school)
                             // if the data is inserted successfully

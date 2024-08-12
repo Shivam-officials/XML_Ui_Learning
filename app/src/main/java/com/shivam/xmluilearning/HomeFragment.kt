@@ -116,7 +116,6 @@ class HomeFragment : Fragment() {
                  * @param snapshot The current data at the location
                  */
                 override fun onDataChange(snapshot: DataSnapshot) {
-//                TODO("Not yet implemented")
 
                     // clear the list before adding new data
                     schoolList.clear()
