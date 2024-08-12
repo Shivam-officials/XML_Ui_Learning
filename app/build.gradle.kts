@@ -1,3 +1,15 @@
+import java.util.Properties
+
+val localProperties = Properties()
+val localPropertiesFile = rootDir.resolve("local.Properties")
+
+if(localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use {
+        stream -> localProperties.load(stream)
+    }
+}
+
+val firebaseApiKey = localProperties["firebaseApiKey"]
 
 plugins {
     alias(libs.plugins.android.application)
@@ -19,6 +31,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "FIREBASE_API_KEY", "\"$firebaseApiKey\"")
+    }
+
+    buildFeatures{
+        buildConfig = true
     }
 
     viewBinding {
@@ -62,6 +80,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.firebase.storage)
     implementation("com.squareup.picasso:picasso:2.71828")
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

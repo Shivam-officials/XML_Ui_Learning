@@ -2,6 +2,7 @@ package com.shivam.xmluilearning.adaptor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.widget.Toast
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -83,11 +84,13 @@ class SchoolCardAdaptor( private val schools: List<School>): RecyclerView.Adapte
         val currentItem = schools[position]
         holder.apply {
 
+
             binding.title.text = currentItem.name
             binding.location.text = currentItem.address
             binding.rating.text = currentItem.ratings
             binding.ratingCount.text = currentItem.ratingCount
             Picasso.get().load(currentItem.schoolImageUrl).into(binding.carImage)
+//            binding.idSchoolCardContainer.startAnimation(Animation.)
             binding.idSchoolCardContainer.setOnClickListener {
 
                 val action = HomeFragmentDirections.actionHomeFragmentToFragmentUpdateData(schools[position].id!!)
