@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 import com.shivam.xmluilearning.adaptor.SchoolCardAdaptor
 import com.shivam.xmluilearning.databinding.FragmentHomeBinding
 import com.shivam.xmluilearning.model.School
@@ -29,7 +30,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class HomeFragment : Fragment() {
 
-    private var _binding : FragmentHomeBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     //list of schools
@@ -37,6 +38,7 @@ class HomeFragment : Fragment() {
 
     //realtime database reference
     private val firebaseRef = FirebaseDatabase.getInstance().getReference("schools list")
+    private val schoolListCollectionRef = FirebaseFirestore.getInstance().collection("school list")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +46,7 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_home, container, false)
-        _binding = FragmentHomeBinding.inflate(inflater,container,false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -75,49 +77,69 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
         }
-        fetchData()
+        fetchDataFromFireStore()
 
     }
 
-    private fun fetchData() {
-        firebaseRef.addValueEventListener(object : ValueEventListener {
-            /**
-             * This method will be called with a snapshot of the data at this location. It will also be called
-             * each time that data changes.
-             *
-             * @param snapshot The current data at the location
-             */
-            override fun onDataChange(snapshot: DataSnapshot) {
+    private fun fetchDataFromFireStore() {
+        val schoolListQuery = schoolListCollectionRef.get()
+            .addOnSuccessListener {
+            if (!it.isEmpty) {
+                schoolList.clear()
+                for (school in it.documents) {
+                    val schoolData = school.toObject(School::class.java)
+                    schoolList.add(schoolData!!)
+                    val schoolListAdaptor = SchoolCardAdaptor(schoolList)
+                    binding.idSchoolsListView.adapter = schoolListAdaptor
+                }
+            } else {
+                Toast.makeText(context, "No data found in firestore", Toast.LENGTH_SHORT).show()
+            }
+        }
+            .addOnFailureListener{
+                Toast.makeText(context, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
+            }
+
+    }
+
+         fun fetchData() {
+            firebaseRef.addValueEventListener(object : ValueEventListener {
+                /**
+                 * This method will be called with a snapshot of the data at this location. It will also be called
+                 * each time that data changes.
+                 *
+                 * @param snapshot The current data at the location
+                 */
+                override fun onDataChange(snapshot: DataSnapshot) {
 //                TODO("Not yet implemented")
 
-                // clear the list before adding new data
-                schoolList.clear()
-                // loop through the data and add it to the list
-                if (snapshot.exists()){
-                    Log.d("HomeFragment", "onDataChange: ${snapshot.children}")
-                   for (school in snapshot.children){
-                      val schoolData = school.getValue(School::class.java)
-                       schoolList.add(schoolData!!)
-                   }
+                    // clear the list before adding new data
+                    schoolList.clear()
+                    // loop through the data and add it to the list
+                    if (snapshot.exists()) {
+                        Log.d("HomeFragment", "onDataChange: ${snapshot.children}")
+                        for (school in snapshot.children) {
+                            val schoolData = school.getValue(School::class.java)
+                            schoolList.add(schoolData!!)
+                        }
+                    }
+
+                    val schoolListAdaptor = SchoolCardAdaptor(schoolList)
+                    binding.idSchoolsListView.adapter = schoolListAdaptor
                 }
 
-                val schoolListAdaptor = SchoolCardAdaptor(schoolList)
-                binding.idSchoolsListView.adapter = schoolListAdaptor
-            }
-
-            /**
-             * This method will be triggered in the event that this listener either failed at the server, or
-             * is removed as a result of the security and Firebase Database rules. For more information on
-             * securing your data, see: [ Security
+                /**
+                 * This method will be triggered in the event that this listener either failed at the server, or
+                 * is removed as a result of the security and Firebase Database rules. For more information on
+                 * securing your data, see: [ Security
  * Quickstart](https://firebase.google.com/docs/database/security/quickstart)
-             *
-             * @param error A description of the error that occurred
-             */
-            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-                Toast.makeText(context, "error $error", Toast.LENGTH_SHORT).show()
-            }
+                 *
+                 * @param error A description of the error that occurred
+                 */
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(context, "error $error", Toast.LENGTH_SHORT).show()
+                }
 
-        })
+            })
+        }
     }
-}

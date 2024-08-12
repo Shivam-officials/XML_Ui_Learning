@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.shivam.xmluilearning.databinding.FragmentUpdateDataBinding
 import com.shivam.xmluilearning.model.School
@@ -30,6 +31,9 @@ class FragmentUpdateData : Fragment() {
 
     private var  firebaseRef  = FirebaseDatabase.getInstance().getReference("schools list")
     private var storageRef = FirebaseStorage.getInstance().getReference("images")
+
+    private val firestoreRef = FirebaseFirestore.getInstance().collection("school list")
+
      private  val args : FragmentUpdateDataArgs by navArgs()
 
     private var _binding: FragmentUpdateDataBinding? = null
@@ -112,11 +116,26 @@ class FragmentUpdateData : Fragment() {
         }
 
         // get the data from the firebase to populate the fields
-        fillFieldsFromIdFromFirebase()
+        fillFieldsFromIdFromFirebaseFireStore()
 
 
     }
 
+    private fun fillFieldsFromIdFromFirebaseFireStore() {
+        firestoreRef.document(args.id).get().addOnSuccessListener {
+            val dataReceived = it.toObject(School::class.java)
+            if (dataReceived != null) {
+                with(binding) {
+                    idDrivingSchoolName.setText(dataReceived.name)
+                    idSchoolAddress.setText(dataReceived.address)
+                    idRatings.setText(dataReceived.ratings)
+                    idRatingCount.setText(dataReceived.ratingCount)
+                    Picasso.get().load(dataReceived.schoolImageUrl).into(idSchoolImage)
+                }
+            }
+
+        }
+    }
 
 
     private fun deleteData(id: String) {
