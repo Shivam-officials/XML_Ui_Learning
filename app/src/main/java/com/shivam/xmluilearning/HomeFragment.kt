@@ -82,11 +82,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchDataFromFireStore() {
-        val schoolListQuery = schoolListCollectionRef.get()
-            .addOnSuccessListener {
-            if (!it.isEmpty) {
+        val schoolListQuery = schoolListCollectionRef
+            .addSnapshotListener { value,exception ->
+                
+                exception?.let {
+                    Toast.makeText(this.context, "exception in list fetching from firestore in realtime", Toast.LENGTH_SHORT).show()
+                    return@addSnapshotListener
+                }
+                
+            if (value!= null) {
                 schoolList.clear()
-                for (school in it.documents) {
+                for (school in value.documents) {
+
                     val schoolData = school.toObject(School::class.java)
                     schoolList.add(schoolData!!)
                     val schoolListAdaptor = SchoolCardAdaptor(schoolList)
@@ -96,9 +103,7 @@ class HomeFragment : Fragment() {
                 Toast.makeText(context, "No data found in firestore", Toast.LENGTH_SHORT).show()
             }
         }
-            .addOnFailureListener{
-                Toast.makeText(context, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
-            }
+            
 
     }
 
