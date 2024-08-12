@@ -158,7 +158,7 @@ class FragmentUpdateData : Fragment() {
                     storageRef.child(schoolId).putFile(uri)
                         .addOnCompleteListener{
                             it.result.metadata?.reference?.downloadUrl?.addOnSuccessListener {uri->
-                                Toast.makeText(context, "image saved", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(activity, "image saved", Toast.LENGTH_SHORT).show()
 
 
                                 school = School(schoolId, name, address, ratings, ratingCount, uri.toString())
@@ -166,7 +166,7 @@ class FragmentUpdateData : Fragment() {
                                 firebaseRef.child(schoolId).setValue(school)
                                     // if the data is inserted successfully
                                     .addOnCompleteListener {
-                                        Toast.makeText(context, "data saved to RLDB", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(activity, "data saved to RLDB", Toast.LENGTH_SHORT).show()
                                         binding.idDrivingSchoolName.text = null
                                         binding.idSchoolAddress.text = null
                                         binding.idRatings.text = null
@@ -175,13 +175,13 @@ class FragmentUpdateData : Fragment() {
                                     }
                                     // if the data is not inserted successfully
                                     .addOnCanceledListener {
-                                        Toast.makeText(context, "data saving failed for RLDB", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(activity, "data saving failed for RLDB", Toast.LENGTH_SHORT).show()
                                     }
                             }
 
                         }
                         .addOnCanceledListener {
-                            Toast.makeText(context, "Image saved failed", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(activity, "Image saved failed", Toast.LENGTH_SHORT).show()
                         }
                 }
 
