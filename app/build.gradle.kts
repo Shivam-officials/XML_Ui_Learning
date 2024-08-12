@@ -1,3 +1,15 @@
+import java.util.Properties
+
+val localProperties = Properties()
+val localPropertiesFile = rootDir.resolve("local.Properties")
+
+if(localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use {
+        stream -> localProperties.load(stream)
+    }
+}
+
+val firebaseApiKey = localProperties["firebaseApiKey"]
 
 plugins {
     alias(libs.plugins.android.application)
@@ -19,6 +31,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "FIREBASE_API_KEY", "\"$firebaseApiKey\"")
+    }
+
+    buildFeatures{
+        buildConfig = true
     }
 
     viewBinding {
